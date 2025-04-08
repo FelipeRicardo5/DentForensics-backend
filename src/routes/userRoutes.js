@@ -16,6 +16,9 @@ router.get('/:id', userController.getUserById);
 // Atualizar um usuário
 router.put('/:id', userController.updateUser);
 
+// Atualizar recurso espeficico do usuário 
+router.patch('/:id', userController.patchUser);
+
 // Deletar um usuário (Admin apenas)
 router.delete('/:id', userController.deleteUser);
 

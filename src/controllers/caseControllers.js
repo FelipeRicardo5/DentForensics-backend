@@ -44,6 +44,26 @@ export const updateCase = async (req, res) => {
   }
 };
 
+export const patchCase = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    const updatedCase = await Case.findByIdAndUpdate(id, updateData, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updatedCase) {
+      return res.status(404).json({ message: 'Caso não encontrado' });
+    }
+
+    res.status(200).json(updatedCase);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao atualizar o caso', error: error.message });
+  }
+};
+
 export const deleteCase = async (req, res) => {
   try {
     const caso = await Case.findByIdAndDelete(req.params.id);
@@ -56,4 +76,4 @@ export const deleteCase = async (req, res) => {
   }
 };
 
-export default { createCase, getAllCases, getCaseById, updateCase, deleteCase };
+export default { createCase, getAllCases, getCaseById, updateCase, patchCase, deleteCase };

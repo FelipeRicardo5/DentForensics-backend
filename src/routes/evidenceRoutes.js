@@ -16,6 +16,9 @@ router.get('/:id', evidenceController.getEvidenceById);
 // Atualizar uma evidência
 router.put('/:id', evidenceController.updateEvidence);
 
+// Atualizar recurso especifico da evidencia
+router.patch('/:id', evidenceController.patchEvidence);
+
 // Deletar uma evidência
 router.delete('/:id', evidenceController.deleteEvidence);
 

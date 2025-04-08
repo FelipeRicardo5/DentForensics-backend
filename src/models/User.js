@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import formatDatePlugin from '../utils/formatDatePlugin.js';
 
 export const userSchema = new mongoose.Schema({
 
@@ -8,6 +9,10 @@ export const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['perito', 'admin', 'assistente'], required: true },
 
 }, { timestamps: true }); // timestamps: true adiciona createdAt e updatedAt automaticamente 
+
+// Formatando data
+userSchema.plugin(formatDatePlugin);
+
 
 const User = mongoose.model('User', userSchema); 
 
