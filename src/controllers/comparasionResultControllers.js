@@ -53,6 +53,29 @@ export const updateComparisonResult = async (req, res) => {
   }
 };
 
+export const patchComparisonResult = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    const comparisonResult = await ComparisonResult.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!comparisonResult) {
+      return res.status(404).json({ message: 'Resultado de comparação não encontrado' });
+    }
+
+    res.status(200).json(comparisonResult);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Erro ao atualizar resultado de comparação',
+      error: error.message,
+    });
+  }
+};
+
 export const deleteComparisonResult = async (req, res) => {
   try {
     const comparisonResult = await ComparisonResult.findByIdAndDelete(req.params.id);
@@ -65,4 +88,4 @@ export const deleteComparisonResult = async (req, res) => {
   }
 };
 
-export default { createComparisonResult, getAllComparisonResults, getComparisonResultById, updateComparisonResult, deleteComparisonResult };  
+export default { createComparisonResult, getAllComparisonResults, getComparisonResultById, updateComparisonResult, patchComparisonResult, deleteComparisonResult };  

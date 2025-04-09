@@ -54,6 +54,26 @@ export const updateUser = async (req, res) => {
   }
 };
 
+export const patchUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(id, updateData, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao atualizar o usuário', error: error.message });
+  }
+};
+
 export const deleteUser = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
@@ -66,4 +86,4 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-export default { createUser, getAllUsers, getUserById, updateUser, deleteUser };
+export default { createUser, getAllUsers, getUserById, updateUser, patchUser, deleteUser };

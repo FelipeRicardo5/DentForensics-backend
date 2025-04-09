@@ -17,6 +17,9 @@ router.get('/:id', caseController.getCaseById);
 // Atualizar um caso (Ex: Alterar status) apenas para o perito
 router.put('/:id', authMidd, roleMidd(['perito']), caseController.updateCase);
 
+// Atualizar um recurso especifico dentro de casos, apenas o perito
+router.patch('/:id', authMidd, roleMidd(['perito'], caseController.patchCase))
+
 // Deletar um caso (perito)
 router.delete('/:id', authMidd, roleMidd(['perito']), caseController.deleteCase);
 

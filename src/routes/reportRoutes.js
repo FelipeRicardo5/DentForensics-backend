@@ -16,6 +16,9 @@ router.get('/:id', reportController.getReportById);
 // Atualizar um relatório
 router.put('/:id', reportController.updateReport);
 
+// Atualizar recurso especifico do relatório
+router.patch('/:id', reportController.patchReport);
+
 // Deletar um relatório
 router.delete('/:id', reportController.deleteReport);
 

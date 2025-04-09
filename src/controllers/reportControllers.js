@@ -45,6 +45,29 @@ export const updateReport = async (req, res) => {
   }
 };
 
+export const patchReport = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    const report = await Report.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!report) {
+      return res.status(404).json({ message: 'Relatório não encontrado' });
+    }
+
+    res.status(200).json(report);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Erro ao atualizar relatório',
+      error: error.message,
+    });
+  }
+};
+
 export const deleteReport = async (req, res) => {
   try {
     const report = await Report.findByIdAndDelete(req.params.id);
@@ -57,4 +80,4 @@ export const deleteReport = async (req, res) => {
   }
 };
 
-export default { createReport, getAllReports, getReportById, updateReport, deleteReport };
+export default { createReport, getAllReports, getReportById, updateReport, patchReport, deleteReport };
