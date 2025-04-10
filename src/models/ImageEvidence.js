@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import formatDatePlugin from '../utils/formatDatePlugin.js';
 
 const imageEvidenceSchema = new mongoose.Schema({
 
@@ -10,5 +11,9 @@ const imageEvidenceSchema = new mongoose.Schema({
 }, { timestamps: true }); // timestamps: true adiciona createdAt e updatedAt automaticamente 
 
 const ImageEvidence = mongoose.model('ImageEvidence', imageEvidenceSchema);
+
+// Formatando data
+imageEvidenceSchema.plugin(formatDatePlugin);
+
 
 export default ImageEvidence;

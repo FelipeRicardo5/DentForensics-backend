@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import formatDatePlugin from '../utils/formatDatePlugin.js';
 
 const textEvidenceSchema = new mongoose.Schema({
 
@@ -8,6 +9,10 @@ const textEvidenceSchema = new mongoose.Schema({
   evidencias: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Evidence' }],
 
 }, { timestamps: true }); // timestamps: true adiciona createdAt e updatedAt automaticamente 
+
+// Formatando data
+textEvidenceSchema.plugin(formatDatePlugin);
+
 
 const TextEvidence = mongoose.model('TextEvidence', textEvidenceSchema);
 

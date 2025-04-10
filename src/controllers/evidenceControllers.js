@@ -44,6 +44,29 @@ export const updateEvidence = async (req, res) => {
   }
 };
 
+export const patchEvidence = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    const evidence = await Evidence.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!evidence) {
+      return res.status(404).json({ message: 'Evidência não encontrada' });
+    }
+
+    res.status(200).json(evidence);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Erro ao atualizar evidência',
+      error: error.message,
+    });
+  }
+};
+
 export const deleteEvidence = async (req, res) => {
   try {
     const evidence = await Evidence.findByIdAndDelete(req.params.id);
@@ -56,4 +79,4 @@ export const deleteEvidence = async (req, res) => {
   }
 };
 
-export default { createEvidence, getAllEvidences, getEvidenceById, updateEvidence, deleteEvidence };
+export default { createEvidence, getAllEvidences, getEvidenceById, updateEvidence, patchEvidence, deleteEvidence };

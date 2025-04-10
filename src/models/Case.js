@@ -1,5 +1,6 @@
 import e from 'express';
 import mongoose from 'mongoose';
+import formatDatePlugin from '../utils/formatDatePlugin.js';
 
 const caseSchema = new mongoose.Schema({
 
@@ -12,6 +13,9 @@ const caseSchema = new mongoose.Schema({
     relatorios: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Report' }],
 
 }, { timestamps: true }); // timestamps: true adiciona createdAt e updatedAt automaticamente 
+
+// Formatando data
+caseSchema.plugin(formatDatePlugin);
 
 const Case = mongoose.model('Case', caseSchema);
 

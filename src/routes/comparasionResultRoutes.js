@@ -16,6 +16,9 @@ router.get('/:id', comparisonResultController.getComparisonResultById);
 // Atualizar um resultado de comparação
 router.put('/:id', comparisonResultController.updateComparisonResult);
 
+// Atualizar recurso especifico do resultado da comparação
+router.patch('/:id', comparisonResultController.patchComparisonResult);
+
 // Deletar um resultado de comparação
 router.delete('/:id', comparisonResultController.deleteComparisonResult);
 

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import formatDatePlugin from '../utils/formatDatePlugin.js';
 
 const reportSchema = new mongoose.Schema({
 
@@ -10,6 +11,10 @@ const reportSchema = new mongoose.Schema({
   casoRelacionado: { type: mongoose.Schema.Types.ObjectId, ref: 'Case', required: true },
 
 }, { timestamps: true }); // timestamps: true adiciona createdAt e updatedAt automaticamente 
+
+// Formatando data
+reportSchema.plugin(formatDatePlugin);
+
 
 const Report = mongoose.model('Report', reportSchema);
 

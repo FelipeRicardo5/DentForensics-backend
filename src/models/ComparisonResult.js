@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import formatDatePlugin from '../utils/formatDatePlugin.js';
 
 const comparisonResultSchema = new mongoose.Schema({
 
@@ -9,6 +10,9 @@ const comparisonResultSchema = new mongoose.Schema({
   evidenciasEnvolvidas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Evidence' }], // é uma referência a um array de evidências já que podemos ter mais de uma evidência envolvida em uma comparação  
 
 }, { timestamps: true }); // timestamps: true adiciona createdAt e updatedAt automaticamente 
+
+// Formatando data
+comparisonResultSchema.plugin(formatDatePlugin);
 
 const ComparisonResult = mongoose.model('ComparisonResult', comparisonResultSchema);
 
