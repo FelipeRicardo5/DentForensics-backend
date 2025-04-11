@@ -6,6 +6,7 @@ import userRoutes from './src/routes/userRoutes.js';
 import evidenceRoutes from './src/routes/evidenceRoutes.js';
 import reportRoutes from './src/routes/reportRoutes.js';
 import caseRoutes from './src/routes/caseRoutes.js';
+import imageEvidenceRoutes from './src/routes/imageEvidenceRoutes.js';
 
 
 const app = express();
@@ -17,5 +18,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/evidences', evidenceRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/cases', caseRoutes);
+app.use('/api/upload', imageEvidenceRoutes);
 
 export default app;
