@@ -3,8 +3,8 @@ import Report from '../models/Report.js';
 
 export const createReport = async (req, res) => {
   try {
-    const { titulo, conteudo, peritoResponsavel, dataCriacao } = req.body;
-    const newReport = new Report({ titulo, conteudo, peritoResponsavel, dataCriacao });
+    const { titulo, conteudo, peritoResponsavel, dataCriacao, casoRelacionado } = req.body;
+    const newReport = new Report({ titulo, conteudo, peritoResponsavel, dataCriacao, casoRelacionado });
     await newReport.save();
     res.status(201).json(newReport);
   } catch (error) {
