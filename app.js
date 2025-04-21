@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-
+import cors from 'cors';
 import authRoutes from './src/routes/authRoutes.js';
 import userRoutes from './src/routes/userRoutes.js';
 import evidenceRoutes from './src/routes/evidenceRoutes.js';
@@ -12,6 +12,7 @@ import imageEvidenceRoutes from './src/routes/imageEvidenceRoutes.js';
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
