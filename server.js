@@ -7,7 +7,7 @@ import Loaders from "./src/loaders/startDb.js";
 
 app.use(express.json());
 const corsOptions ={
-    origin:'http://localhost:3000', 
+    origin:'http://localhost:3000/dashboard', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
