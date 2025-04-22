@@ -15,6 +15,9 @@ const swaggerDefinition = {
         url: "http://localhost:3000",
         description: "Servidor temporario de teste",
       },
+      {
+        apis: ["./src/routes/*.js"],
+      },
     ],
     components: {
       securitySchemes: {
@@ -34,11 +37,11 @@ const swaggerDefinition = {
   
   const options = {
     swaggerDefinition,
-    apis: ["./routes/*.js"],
+    apis: ["/src/routes/*.js"],
   };
-  
+
   const swaggerSpec = swaggerJSDoc(options);
-  
-  module.exports = (app) => {
-    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-  };
+
+  export default swaggerSpec; 
+
+
