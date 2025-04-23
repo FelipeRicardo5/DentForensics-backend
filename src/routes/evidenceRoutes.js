@@ -1,8 +1,15 @@
 import express from 'express';
 import { Router } from 'express';
 import evidenceController from '../controllers/evidenceControllers.js';
+import upload from '../middlewares/upload.js';
 
 const router = Router();
+
+// Fazer upload de imagem
+router.post('/upload', upload.single('file'), evidenceController.uploadImage);
+
+// Deletar imagem
+router.delete('/upload/:id', evidenceController.deleteImage);
 
 // Criar uma nova evidência
 router.post('/', evidenceController.createEvidence);

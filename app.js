@@ -19,6 +19,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/evidences', evidenceRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/cases', caseRoutes);
-app.use('/api/upload', imageEvidenceRoutes);
+// app.use('/api/upload', imageEvidenceRoutes);
 
 export default app;
