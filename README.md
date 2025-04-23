@@ -1,4 +1,4 @@
-# DentForensics-backend ♨︎
+# siop || slop - backend ♨︎
 
 ## **Descrição**  
 Este projeto é uma API para gerenciamento de casos forenses, evidências e laudos periciais. Ele implementa autenticação JWT e controle de permissões para diferentes papéis de usuários (**Admin, Perito, Assistente**).  
