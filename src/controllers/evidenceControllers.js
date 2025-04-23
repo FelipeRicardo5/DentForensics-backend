@@ -81,7 +81,7 @@ export const createEvidence = async (req, res) => {
 
 export const getAllEvidences = async (req, res) => {
   try {
-    const evidences = await Evidence.find();
+    const evidences = await Evidence.find();  
     if (!evidences || evidences.length === 0) {
       return res.status(404).json({ message: 'Nenhuma evidência encontrada' });
     }

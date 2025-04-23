@@ -102,7 +102,7 @@ export const geocodeAddress = async (req, res) => {
         limit: 1,
       },
       headers: {
-        'User-Agent': 'siop/1.0 (felipe1ricardo158@gmail.com)' // Cabeçalho correto
+        'User-Agent': 'siop/1.0 (felipe1ricardo158@gmail.com)' // user-agent é obrigatório!!!
       }
     });
 
