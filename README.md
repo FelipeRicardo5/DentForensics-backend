@@ -10,6 +10,9 @@ Este projeto é uma API para gerenciamento de casos forenses, evidências e laud
 - **Dotenv** para gerenciamento de variáveis de ambiente  
 - **Cors** controle de acessos
 - **Bcryptjs** hash de senhas
+- **multer** upload de imagens
+- **axios** para requisição da api 
+- **nominatim** api externa geocoding
 
 ---
 
@@ -185,8 +188,8 @@ Estamos trabalhando em uma nova atualização do sistema que trará **novas func
 
 Entre as principais melhorias previstas, destacamos:
 
-- 6.1 **Upload de Imagens:** será possível anexar imagens diretamente nos casos e evidências, facilitando a documentação visual do material periciado.  
-- 6.2 **Visualização de Arquivos:** as imagens enviadas poderão ser visualizadas dentro da aplicação como pdf, otimizando o processo de análise.
+- ~~6.1 **Upload de Imagens:** será possível anexar imagens diretamente nos casos e evidências, facilitando a documentação visual do material periciado.~~
+- ~~6.2 **Visualização de Arquivos:** as imagens enviadas poderão ser visualizadas dentro da aplicação como pdf, otimizando o processo de análise.~~
 
 Essas funcionalidades estarão disponíveis em breve e farão parte de um conjunto de atualizações voltadas à **melhoria da experiência do usuário e do fluxo de trabalho pericial**.
 
