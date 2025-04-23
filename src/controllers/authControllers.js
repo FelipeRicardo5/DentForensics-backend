@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import User from '../models/User.js'; 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'; 
@@ -47,4 +48,45 @@ export const verifyToken = (req, res, next) => {
   });
 };
 
-export default { login, logout, verifyToken };
+// Solicitação de esquecimento de senha (gera token e retorna ao front)
+export const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: 'Usuário não encontrado' });
+
+    const token = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordToken   = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // expira em 1h
+    await user.save();
+
+    // Retorna token para o front construir o link de reset
+    res.json({ message: 'Token gerado com sucesso', resetToken: token });
+  } catch (err) {
+    res.status(500).json({ message: 'Erro ao gerar token', error: err.message });
+  }
+};
+
+// Reset de senha usando token
+export const resetPassword = async (req, res) => {
+  const { token, newPassword } = req.body;
+  try {
+    const user = await User.findOne({
+      resetPasswordToken:   token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+    if (!user) return res.status(400).json({ message: 'Token inválido ou expirado' });
+
+    const salt = await bcrypt.genSalt(10);
+    user.senha                 = await bcrypt.hash(newPassword, salt);
+    user.resetPasswordToken    = undefined;
+    user.resetPasswordExpires  = undefined;
+    await user.save();
+
+    res.json({ message: 'Senha redefinida com sucesso.' });
+  } catch (err) {
+    res.status(500).json({ message: 'Erro ao redefinir senha', error: err.message });
+  }
+};
+
+export default { login, logout, verifyToken, resetPassword, forgotPassword };

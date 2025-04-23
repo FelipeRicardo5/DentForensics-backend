@@ -8,6 +8,10 @@ export const userSchema = new mongoose.Schema({
   senha: { type: String, required: true },
   role: { type: String, enum: ['perito', 'admin', 'assistente'], required: true },
 
+  // Campos para reset de senha:
+  resetPasswordToken:   { type: String },
+  resetPasswordExpires: { type: Date }
+
 }, { timestamps: true }); // timestamps: true adiciona createdAt e updatedAt automaticamente 
 
 // Formatando data
