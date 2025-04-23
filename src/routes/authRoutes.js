@@ -10,4 +10,8 @@ router.post('/login', authController.login);
 // Logout do usuário
 router.post('/logout', authController.logout);
 
+router.post('/forgot-password', authController.forgotPassword);
+
+router.post('/reset-password',  authController.resetPassword);
+
 export default router;
