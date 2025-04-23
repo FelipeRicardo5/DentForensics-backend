@@ -23,4 +23,6 @@ router.patch('/:id', authMidd, roleMidd(['perito'], caseController.patchCase))
 // Deletar um caso (perito)
 router.delete('/:id', authMidd, roleMidd(['perito']), caseController.deleteCase);
 
+router.get('/geo/:id', caseController.geocodeAddress);
+
 export default router;

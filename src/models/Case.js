@@ -7,6 +7,7 @@ const caseSchema = new mongoose.Schema({
     titulo: { type: String, required: true },
     descricao: { type: String, required: true },
     status: { type: String, enum: ['Aberto', 'Em Análise', 'Fechado'], required: true },
+    localizacao: { type: String, required: true }, // Localização do caso to passando como required por que é uma API externa, assim cumprimos um requisito.
     dataAbertura: { type: Date, default: Date.now }, // Formato: YYYY-MM-DD
     dataFechamento: { type: Date },  // Formato: YYYY-MM-DD
     evidencias: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Evidence' }],
