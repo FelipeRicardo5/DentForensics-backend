@@ -5,6 +5,14 @@ import caseController from '../controllers/caseControllers.js';
 
 const router = Router();
 
+// Criar um novo caso (Usuario)
+router.post('/:id', caseController.createCaseByIdUser);
+// router.post('/:id', authMidd, roleMidd(['perito']), caseController.createCaseByIdUser);
+
+// Obter todos os casos de um usuario (Usuario)
+router.get('/:id', caseController.getAllCasesByUserId);
+// router.get('/:id', authMidd, roleMidd(['perito']), caseController.getAllCasesByUserId);
+
 // Criar um novo caso (Perito)
 router.post('/', caseController.createCase);
 

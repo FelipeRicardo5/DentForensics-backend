@@ -4,14 +4,39 @@ import axios from 'axios';
 export const createCase = async (req, res) => {
   try {
     console.log(req.body);
-    const { titulo, descricao, status, dataAbertura, dataFechamento, localizacao } = req.body;
-    const newCase = new Case({ titulo, descricao, status, dataAbertura, dataFechamento, localizacao });
+    const { titulo, descricao, status, dataAbertura, dataFechamento, localizacao, responsavel } = req.body;
+    const newCase = new Case({ titulo, descricao, status, dataAbertura, dataFechamento, localizacao, responsavel });
     await newCase.save();
     res.status(201).json(newCase);
   } catch (error) {
     res.status(500).json({ message: 'Erro ao criar o caso', error });
   }
 };
+
+
+export const createCaseByIdUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const { titulo, descricao, status, dataAbertura, dataFechamento, localizacao } = req.body;
+    const newCase = new Case({ titulo, descricao, status, dataAbertura, dataFechamento, localizacao, responsavel: userId });
+    await newCase.save();
+    res.status(201).json(newCase);
+  }
+  catch (error) {
+    res.status(500).json({ message: 'Erro ao criar o caso por usuário', error });
+  }
+};
+
+export const getAllCasesByUserId = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const cases = await Case.find({ responsavel: userId });
+    res.status(200).json(cases);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao obter casos', error });
+  }
+};
+
 
 export const getAllCases = async (req, res) => {
   try {
@@ -124,4 +149,4 @@ export const geocodeAddress = async (req, res) => {
 };
 
 
-export default { createCase, getAllCases, getCaseById, updateCase, patchCase, deleteCase, geocodeAddress };
+export default { createCase, getAllCases, getCaseById, updateCase, patchCase, deleteCase, geocodeAddress, createCaseByIdUser, getAllCasesByUserId };

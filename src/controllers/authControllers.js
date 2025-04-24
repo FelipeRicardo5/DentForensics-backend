@@ -11,11 +11,11 @@ export const login = async (req, res) => {
     //   return console.log(user.senha); // Retorna erro se o usuário não for encontrado ou se a senha não existir 
     // }
     if (!user) {
-      return res.status(400).json({ message: 'Email inválido' }); // Retorna erro se o usuário não for encontrado
+      return res.status(400).json({ message: 'Email ou Senha inválida' }); // Retorna erro se o usuário não for encontrado
     }
     const isMatch = await bcrypt.compare(senha, user.senha); // Compara a senha fornecida com a senha do usuário ERRO 
     if (!isMatch) { 
-      return res.status(400).json({ message: 'Senha inválida' }); // Retorna erro se a senha não for igual o ideal seria colocar pra ambos, assim, não expõe o que está errado.
+      return res.status(400).json({ message: 'Email ou Senha inválida' }); // Retorna erro se a senha não for igual o ideal seria colocar pra ambos, assim, não expõe o que está errado.
     }
 
     const generatingToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' }); // Gera um token
