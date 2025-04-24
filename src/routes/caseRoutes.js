@@ -5,32 +5,31 @@ import caseController from '../controllers/caseControllers.js';
 
 const router = Router();
 
-// Criar um novo caso (Usuario)
-router.post('user/:id', caseController.createCaseByIdUser);
-// router.post('/:id', authMidd, roleMidd(['perito']), caseController.createCaseByIdUser);
+// Criar novo caso para um usuário específico
+router.post('/usuario/:id', caseController.createCaseByIdUser);
 
-// Obter todos os casos de um usuario (Usuario)
-router.get('/:id', caseController.getAllCasesByUserId);
-// router.get('/:id', authMidd, roleMidd(['perito']), caseController.getAllCasesByUserId);
+// Obter todos os casos de um usuário
+router.get('/usuario/:id/casos', caseController.getAllCasesByUserId);
 
 // Criar um novo caso (Perito)
 router.post('/', caseController.createCase);
 
-// Obter todos os casos todos tem o acesso
+// Obter todos os casos (todos têm acesso)
 router.get('/', caseController.getAllCases);
 
-// Obter um caso por ID todos tem o acesso
-router.get('/:id', caseController.getCaseById);
+// Obter um caso por ID
+router.get('/caso/:id', caseController.getCaseById);
 
-// Atualizar um caso (Ex: Alterar status) apenas para o perito
-router.put('/:id', authMidd, roleMidd(['perito']), caseController.updateCase);
+// Atualizar um caso (Ex: Alterar status) - apenas perito
+router.put('/caso/:id', authMidd, roleMidd(['perito']), caseController.updateCase);
 
-// Atualizar um recurso especifico dentro de casos, apenas o perito
-router.patch('/:id', authMidd, roleMidd(['perito'], caseController.patchCase))
+// Atualizar parte do caso - apenas perito
+router.patch('/caso/:id', authMidd, roleMidd(['perito']), caseController.patchCase);
 
-// Deletar um caso (perito)
-router.delete('/:id', authMidd, roleMidd(['perito']), caseController.deleteCase);
+// Deletar um caso - apenas perito
+router.delete('/caso/:id', authMidd, roleMidd(['perito']), caseController.deleteCase);
 
+// Geolocalização de endereço de caso
 router.get('/geo/:id', caseController.geocodeAddress);
 
 export default router;
