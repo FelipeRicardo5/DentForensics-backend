@@ -81,7 +81,7 @@ export const createEvidence = async (req, res) => {
 
 export const getAllEvidences = async (req, res) => {
   try {
-    const evidences = await Evidence.find();  
+    const evidences = await Evidence.find().populate('coletadoPor', 'nome email'); // Popula o campo coletadoPor com nome e email do usuário  
     if (!evidences || evidences.length === 0) {
       return res.status(404).json({ message: 'Nenhuma evidência encontrada' });
     }
@@ -93,7 +93,7 @@ export const getAllEvidences = async (req, res) => {
 
 export const getEvidenceById = async (req, res) => {
   try {
-    const evidence = await Evidence.findById(req.params.id);
+    const evidence = await Evidence.findById(req.params.id).populate('coletadoPor', 'nome email'); // Popula o campo coletadoPor com nome e email do usuário
     if (!evidence) {
       return res.status(404).json({ message: 'Evidência não encontrada' });
     }

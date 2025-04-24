@@ -30,7 +30,8 @@ export const createCaseByIdUser = async (req, res) => {
 export const getAllCasesByUserId = async (req, res) => {
   try {
     const userId = req.params.id;
-    const cases = await Case.find({ responsavel: userId });
+    const cases = await Case.find({ responsavel: userId }).
+    populate('responsavel', 'nome email'); // Popula o campo 'responsavel' com os dados do usuário
     res.status(200).json(cases);
   } catch (error) {
     res.status(500).json({ message: 'Erro ao obter casos', error });
@@ -40,7 +41,8 @@ export const getAllCasesByUserId = async (req, res) => {
 
 export const getAllCases = async (req, res) => {
   try {
-    const cases = await Case.find();
+    const cases = await Case.find()
+    .populate('responsavel', 'nome email'); // Popula o campo 'responsavel' com os dados do usuário
     res.status(200).json(cases);
   } catch (error) {
     res.status(500).json({ message: 'Erro ao obter casos', error });
@@ -49,7 +51,7 @@ export const getAllCases = async (req, res) => {
 
 export const getCaseById = async (req, res) => {
   try {
-    const caso = await Case.findById(req.params.id);
+    const caso = await Case.findById(req.params.id).populate('responsavel', 'nome email'); // Popula o campo 'responsavel' com os dados do usuário
     if (!caso) {
       return res.status(404).json({ message: 'Caso não encontrado' });
     }
