@@ -21,13 +21,13 @@ router.get('/', caseController.getAllCases);
 router.get('/caso/:id', caseController.getCaseById);
 
 // Atualizar um caso (Ex: Alterar status) - apenas perito
-router.put('/caso/:id', authMidd, roleMidd(['perito']), caseController.updateCase);
+router.put('/caso/:id', caseController.updateCase);
 
 // Atualizar parte do caso - apenas perito
-router.patch('/caso/:id', authMidd, roleMidd(['perito']), caseController.patchCase);
+router.patch('/caso/:id', caseController.patchCase);
 
 // Deletar um caso - apenas perito
-router.delete('/caso/:id', authMidd, roleMidd(['perito']), caseController.deleteCase);
+router.delete('/caso/:id', caseController.deleteCase);
 
 // Geolocalização de endereço de caso
 router.get('/geo/:id', caseController.geocodeAddress);

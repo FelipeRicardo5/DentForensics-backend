@@ -30,13 +30,14 @@ export const createCaseByIdUser = async (req, res) => {
 export const getAllCasesByUserId = async (req, res) => {
   try {
     const userId = req.params.id;
-    const cases = await Case.find({ responsavel: userId }).
-    populate('responsavel', 'nome email'); // Popula o campo 'responsavel' com os dados do usuário
+    const cases = await Case.find({ responsavel: userId })
+      .populate('responsavel', 'nome email'); // Correção aqui: sem ponto antes de populate
     res.status(200).json(cases);
   } catch (error) {
     res.status(500).json({ message: 'Erro ao obter casos', error });
   }
 };
+
 
 
 export const getAllCases = async (req, res) => {
