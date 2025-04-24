@@ -6,7 +6,7 @@ import caseController from '../controllers/caseControllers.js';
 const router = Router();
 
 // Criar um novo caso (Usuario)
-router.post('/:id', caseController.createCaseByIdUser);
+router.post('user/:id', caseController.createCaseByIdUser);
 // router.post('/:id', authMidd, roleMidd(['perito']), caseController.createCaseByIdUser);
 
 // Obter todos os casos de um usuario (Usuario)
