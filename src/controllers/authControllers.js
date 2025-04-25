@@ -6,23 +6,33 @@ import jwt from 'jsonwebtoken';
 export const login = async (req, res) => {
   const { email, senha } = req.body;
   try {
-    const user = await User.findOne({ email }); // Procura o usuário no banco de dados
-    // if (user.senha) {
-    //   return console.log(user.senha); // Retorna erro se o usuário não for encontrado ou se a senha não existir 
-    // }
+    const user = await User.findOne({ email }); // Find user in the database
     if (!user) {
-      return res.status(400).json({ message: 'Email ou Senha inválida' }); // Retorna erro se o usuário não for encontrado
-    }
-    const isMatch = await bcrypt.compare(senha, user.senha); // Compara a senha fornecida com a senha do usuário ERRO 
-    if (!isMatch) { 
-      return res.status(400).json({ message: 'Email ou Senha inválida' }); // Retorna erro se a senha não for igual o ideal seria colocar pra ambos, assim, não expõe o que está errado.
+      return res.status(400).json({ message: 'Email ou Senha inválida' });
     }
 
-    const generatingToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' }); // Gera um token
-    const token = generatingToken; // Armazena o token
-    res.status(200).json({ token }); // Retorna o token
-  } catch (error) { // Retorna erro se houver algum problema
-    res.status(500).json({ message: 'Erro ao fazer login', error }); 
+    const isMatch = await bcrypt.compare(senha, user.senha); // Compare passwords
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Email ou Senha inválida' });
+    }
+
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    ); // Generate token
+
+    // Return token and user data
+    res.status(200).json({
+      token,
+      user: {
+        _id: user._id,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao fazer login', error });
   }
 };
 
